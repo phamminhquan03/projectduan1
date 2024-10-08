@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -58,7 +57,7 @@
                             <a href="index.php?act=dskh" class='sidebar-link'>
                                 <i class="bi bi-life-preserver"></i>
                                 <span>Quản lý tai khoan</span>
-                            </a>
+</a>
                         </li>
                         <li class="sidebar-item  ">
                             <a href="index.php?act=listbill" class='sidebar-link'>
@@ -86,7 +85,3 @@
                     <i class="bi bi-justify fs-3"></i>
                 </a>
             </header>
-
-           
-
-       
