@@ -7,14 +7,16 @@
     <title>Document</title>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./css/app.css">
+    <link rel="stylesheet" href="">
    <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-     <link rel="stylesheet" href="./css/bootstrap.css">
-     <link rel="stylesheet" href="./vendors/iconly/bold.css">
-     <link rel="stylesheet" href="./vendors/perfect-scrollbar/perfect-scrollbar.css">
+     <link rel="stylesheet" href="./assets/css/app.css">
+     <link rel="stylesheet" href="./assets/vendors/iconly/bold.css">
+
+    
+     <link rel="stylesheet" href="./assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
      <link rel="stylesheet" href="./images/">
-     <link rel="stylesheet" href="./vendors/bootstrap-icons/bootstrap-icons.css">
+     <link rel="stylesheet" href="./assets/vendors/bootstrap-icons/bootstrap-icons.css">
 </head>
 <body>
     <div id="app">
