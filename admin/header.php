@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+
+>>>>>>> 201499c99937f2d2664edc8d7cf7204c44976c2a
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,6 +10,7 @@
     <title>Document</title>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<<<<<<< HEAD
     <link rel="stylesheet" href="">
    <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
@@ -16,6 +21,16 @@
      <link rel="stylesheet" href="./assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
      <link rel="stylesheet" href="./images/">
      <link rel="stylesheet" href="./assets/vendors/bootstrap-icons/bootstrap-icons.css">
+=======
+    <link rel="stylesheet" href="./css/app.css">
+   <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+     <link rel="stylesheet" href="./css/bootstrap.css">
+     <link rel="stylesheet" href="./vendors/iconly/bold.css">
+     <link rel="stylesheet" href="./vendors/perfect-scrollbar/perfect-scrollbar.css">
+     <link rel="stylesheet" href="./images/">
+     <link rel="stylesheet" href="./vendors/bootstrap-icons/bootstrap-icons.css">
+>>>>>>> 201499c99937f2d2664edc8d7cf7204c44976c2a
 </head>
 <body>
     <div id="app">
@@ -57,7 +72,11 @@
                             <a href="index.php?act=dskh" class='sidebar-link'>
                                 <i class="bi bi-life-preserver"></i>
                                 <span>Quản lý tai khoan</span>
+<<<<<<< HEAD
 </a>
+=======
+                            </a>
+>>>>>>> 201499c99937f2d2664edc8d7cf7204c44976c2a
                         </li>
                         <li class="sidebar-item  ">
                             <a href="index.php?act=listbill" class='sidebar-link'>
@@ -84,4 +103,12 @@
                 <a href="#" class="burger-btn d-block d-xl-none">
                     <i class="bi bi-justify fs-3"></i>
                 </a>
+<<<<<<< HEAD
             </header>
+=======
+            </header>
+
+           
+
+       
+>>>>>>> 201499c99937f2d2664edc8d7cf7204c44976c2a

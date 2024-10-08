@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <style>
     /* Title styling */
     .formtitle h1 {
@@ -167,6 +168,10 @@
         background-color: #0056b3;
     }
 </style>
+=======
+
+
+>>>>>>> 201499c99937f2d2664edc8d7cf7204c44976c2a
 
 <div class="row">
     <div class="row formtitle">
@@ -176,11 +181,19 @@
             <form action="index.php?act=updatedh&id=<?php echo $donhang['id'] ?>" method="post" enctype="multipart/form-data">
                 <div class="row margin10">
                     
+<<<<<<< HEAD
                     Mã đơn hàng
                     <input type="hidden" name="id" value="<?=$donhang['id']?>"> <br>
                     <input type="text" readonly name="id" value="<?=$donhang['id']?>"><br>
                     Khách hàng <br>
                     <input type="text" readonly name="id" value="<?=$donhang['bill_name']?>"><br>
+=======
+                    Mã đơn hàng <br>
+                    <input type="hidden" name="id" value="<?=$donhang['id']?>">
+                    <input type="text" readonly name="id" value="<?=$donhang['id']?>">
+                    Khách hàng <br>
+                    <input type="text" readonly name="id" value="<?=$donhang['bill_name']?>">
+>>>>>>> 201499c99937f2d2664edc8d7cf7204c44976c2a
                           
                     Trạng thái đơn hàng <br>
                     <select name="bill_status">
