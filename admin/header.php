@@ -24,9 +24,9 @@
             <div class="sidebar-wrapper active">
                 <div class="sidebar-header">
                     <div class="d-flex justify-content-between">
-                        <div class="logo">
-                            <a href="index.html"><img src="./images/logo/logo.png" alt="Logo" srcset=""></a>
-                        </div>
+                    <section class="logo">
+                <img src="view/images/logo_nen-trang.png" alt="" height="50px">
+            </section>
                         <div class="toggler">
                             <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
                         </div>

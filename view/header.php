@@ -13,72 +13,76 @@
     <link rel="stylesheet" href="view/css/menu.css">
     
     <script>
+    // Cập nhật tổng tiền của sản phẩm khi số lượng thay đổi
     function updateTotal(price, quantityInput) {
-    var quantity = quantityInput.value;
-    var total = price * quantity;
+        var quantity = quantityInput.value;
+        var total = price * quantity;
 
-    // Tìm phần tử td chứa tổng thành tiền và cập nhật giá trị
-    var totalElement = document.getElementById('total_' + quantityInput.id.split('_')[1]);
-    if (totalElement) {
-        totalElement.textContent = total + ' USD';
-
-        // Gọi hàm để cập nhật tổng tiền
-        updateGrandTotal();
-
-        // Gửi yêu cầu AJAX để cập nhật session
-        updateSession(quantityInput.id.split('_')[1], quantity);
-    } else {
-        console.error('Total element not found.');
-    }
-}
-
-function updateGrandTotal() {
-    var grandTotal = 0;
-
-    // Lặp qua các hàng trong bảng
-    var table = document.getElementById('cartTable');
-    var rows = table.getElementsByTagName('tr');
-    for (var i = 1; i < rows.length - 1; i++) { // Bắt đầu từ 1 để tránh hàng tiêu đề và kết thúc trước hàng tổng đơn hàng
-        var totalElement = rows[i].getElementsByTagName('td')[4]; // Cột chứa tổng thành tiền
+        // Tìm phần tử td chứa tổng thành tiền và cập nhật giá trị
+        var totalElement = document.getElementById('total_' + quantityInput.id.split('_')[1]);
         if (totalElement) {
-            var total = parseFloat(totalElement.textContent.replace(' USD', ''));
+            totalElement.textContent = total + ' USD';
 
-            grandTotal += total;
+            // Cập nhật tổng giỏ hàng
+            updateGrandTotal();
+
+            // Gửi yêu cầu AJAX để cập nhật session
+            updateSession(quantityInput.id.split('_')[1], quantity);
         } else {
-            console.error('Total element not found in row ' + i);
+            console.error('Total element not found.');
         }
     }
 
-    // Cập nhật tổng đơn hàng
-    var grandTotalElement = document.getElementById('grandTotal');
-    if (grandTotalElement) {
-        grandTotalElement.textContent = grandTotal + ' USD';
-    } else {
-        console.error('Grand total element not found.');
-    }
-}
-function updateSession(productId, quantity) {
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-        if (this.readyState == 4) {
-            if (this.status == 200) {
-                // Xử lý kết quả nếu cần
-                console.log('Session updated successfully.');
+    // Cập nhật tổng tiền của tất cả sản phẩm trong giỏ hàng
+    function updateGrandTotal() {
+        var grandTotal = 0;
+
+        // Lặp qua các hàng trong bảng giỏ hàng
+        var table = document.getElementById('cartTable');
+        var rows = table.getElementsByTagName('tr');
+        for (var i = 1; i < rows.length - 1; i++) { // Bắt đầu từ 1 để tránh hàng tiêu đề và kết thúc trước hàng tổng đơn hàng
+            var totalElement = rows[i].getElementsByTagName('td')[4]; // Cột chứa tổng thành tiền
+            if (totalElement) {
+                var total = parseFloat(totalElement.textContent.replace(' USD', ''));
+
+                grandTotal += total;
             } else {
-                
+                console.error('Total element not found in row ' + i);
             }
         }
-    };
 
-    // Tạo URL chứa tham số id và quantity
-    var url = 'update_session.php?id=' + productId + '&soluong=' + quantity;
+        // Cập nhật tổng đơn hàng
+        var grandTotalElement = document.getElementById('grandTotal');
+        if (grandTotalElement) {
+            grandTotalElement.textContent = grandTotal + ' USD';
+        } else {
+            console.error('Grand total element not found.');
+        }
+    }
 
-    xhttp.open("GET", "/Đường_Dẫn_Absolute/update_session.php?id=" + productId + "&soluong=" + quantity, true);
-    xhttp.send();
+    // Gửi yêu cầu AJAX để cập nhật session
+    function updateSession(productId, quantity) {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4) {
+                if (this.status == 200) {
+                    // Xử lý kết quả nếu cần
+                    console.log('Session updated successfully.');
+                } else {
+                    console.error('Error updating session.');
+                }
+            }
+        };
 
-}
+        // Tạo URL chứa tham số id và quantity (cập nhật URL chính xác)
+        var url = 'update_session.php?id=' + productId + '&soluong=' + quantity;
 
+        // Gửi yêu cầu AJAX với URL đúng
+        xhttp.open("GET", url, true);
+        xhttp.send();
+    }
 </script>
+
 
 
 </head>

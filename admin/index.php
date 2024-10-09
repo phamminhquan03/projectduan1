@@ -191,123 +191,34 @@ if(isset($_GET['act'])){
                 $dt_bill = loadall_dt_bill($_GET['id']);          
                 include 'bill/update.php';
                 break;
-            case 'updatedh':
-                if(isset($_POST['capnhat'])){
-                    $id = $_POST['id'];
-                    $thanhtoan = $_POST['bill_thanhtoan'];
-                    $trangthai = $_POST['bill_status'];
-                    update_donhangstatus($id, $trangthai, $thanhtoan);
-                    $thongbao = "Cập nhật thành công";
-                }
-    
-                if(isset($_GET['id'])&&($_GET['id']>0)){
-                    $donhang = loadone_bill($_GET['id']); 
-                }
-                $dt_bill = loadall_dt_bill($_GET['id']);          
-                include 'bill/update.php';
-                break;
-
-            case 'listtintuc':
-                $listtintuc = loadall_tintuc();
-                include "./tintuc/list.php";
-                break;
-
-            // case 'addtintuc':
-            //     unset($_SESSION["error"]);
-            //     if(isset($_POST['themmoi']) && ($_POST['themmoi'])){
-            //         $error = [];
-            //         if(empty($_POST["tieu_de"])){
-            //             $error[] = "Vui lòng nhập tiêu đề";
-            //         }
-            //         if(empty($_POST["noi_dung"])){
-            //             $error[] = "Vui lòng nhập nội dung";
-            //         }
-            //         if(empty($_FILES["hinh_anh"]["name"])){
-            //             $error[] = "Vui lòng nhập chọn hình";
-            //         }
-            //         if(count($error) >= 1){
-            //             $_SESSION['error'] = $error;
-            //         }else{
-            //             $tieu_de = $_POST['tieu_de'];
-            //             $noi_dung = $_POST['noi_dung'];
-            //             $iddm = $_POST['id_danhmuc'];
-            //             $file_name = $_FILES['hinh_anh']['name'];
-            //             $target_dir = "../upload/";
-            //             $target_file = $target_dir . basename($_FILES["hinh_anh"]["name"]);
-            //             if (move_uploaded_file($_FILES["hinh_anh"]["tmp_name"], $target_file)) {
-            //                 // echo "The file ". htmlspecialchars( basename( $_FILES["hinh"]["name"])). " has been uploaded.";
-            //                } else {
-            //                  echo "Sorry, there was an error uploading your file.";
-            //                }
-            //             insert_tintuc($tieu_de, $noi_dung, $file_name, $iddm);
-            //             $thongbao = "Thêm thành công";
-            //         }
-            //     }
-            //     $listdmtintuc = loadall_dmtt();
-            //     include "./tintuc/add.php";
-            //     break;
-
-                case 'xoatt':
-                    if(isset($_GET['id'])&&($_GET['id']>0)){
-                        delete_tintuc($_GET['id']);
-                    }
-                    $listtintuc = loadall_tintuc("",0);
-                    include './tintuc/list.php';
-                    break;
-
-                case 'listsach':
-                    $listsach = loadall_sach();
-                    include "./sach/list.php";
-                    break;
-
-                case 'xoasach':
-                    if(isset($_GET['id'])&&($_GET['id']>0)){
-                        delete_sach($_GET['id']);
-                    }
-                    $listsach = loadall_sach("",0);
-                    include './sach/list.php';
-                    break;
-
-                case 'addsach':
-                        unset($_SESSION["error"]);
-                        if(isset($_POST['themmoi']) && ($_POST['themmoi'])){
-                            $error = [];
-                            if(empty($_POST["ten_sach"])){
-                                $error[] = "Vui lòng nhập tên sách";
-                            }
-                            if(empty($_FILES["hinh_anh"]["name"])){
-                                $error[] = "Vui lòng nhập chọn hình";
-                            }
-                            if(empty($_POST["gia"])){
-                                $error[] = "Vui lòng nhập giá";
-                            }
-                            if(empty($_POST["mo_ta"])){
-                                $error[] = "Vui lòng nhập mô tả";
-                            }
-                            
-                            
-                            if(count($error) >= 1){
-                                $_SESSION['error'] = $error;
-                            }else{
-                                $ten_sach = $_POST['ten_sach'];
-                                $gia = $_POST['gia'];
-                                $mo_ta = $_POST['mo_ta'];
-                                //$id_nhaxuatban = $_POST['id_nhaxuatban'];
-                                $file_name = $_FILES['hinh_anh']['name'];
-                                $target_dir = "../upload/";
-                                $target_file = $target_dir . basename($_FILES["hinh_anh"]["name"]);
-                                if (move_uploaded_file($_FILES["hinh_anh"]["tmp_name"], $target_file)) {
-                                    // echo "The file ". htmlspecialchars( basename( $_FILES["hinh"]["name"])). " has been uploaded.";
-                                    } else {
-                                        echo "Sorry, there was an error uploading your file.";
-                                    }
-                                    insert_sach($ten_sach, $gia, $file_name,  $mo_ta);
-                                $thongbao = "Thêm thành công";
-                            }
+                case 'updatedh':
+                    if (isset($_POST['capnhat'])) {
+                        $id = $_POST['id'];
+                        $thanhtoan = $_POST['bill_thanhtoan'];
+                        $new_status = $_POST['bill_status'];
+                
+                        // Load the current order status from the database
+                        $donhang = loadone_bill($id); 
+                        $current_status = $donhang['bill_status'];
+                
+                        // Check if the new status is earlier than the current status
+                        if ($new_status < $current_status) {
+                            // Prevent update if trying to revert to an earlier status
+                            $thongbao = "Không thể quay lại trạng thái trước.";
+                        } else {
+                            // Proceed with the update
+                            update_donhangstatus($id, $new_status, $thanhtoan);
+                            $thongbao = "Cập nhật thành công";
                         }
-                        $listdmnxb = loadall_nhaxuatban();
-                        include "./sach/add.php";
-                        break;
+                    }
+                
+                    if (isset($_GET['id']) && ($_GET['id'] > 0)) {
+                        $donhang = loadone_bill($_GET['id']); 
+                    }
+                    
+                    $dt_bill = loadall_dt_bill($_GET['id']);          
+                    include 'bill/update.php';
+                    break;
                 
         default:
             include 'home.php';

@@ -58,7 +58,7 @@ if (isset($_GET['id']) && isset($_GET['action']) && $_GET['action'] == 'delete')
                                         <td>';
 
                                 // Kiểm tra nếu trạng thái đơn hàng là "đang giao hàng" (giả sử trạng thái "đang giao hàng" là '1')
-                                if ($bill['bill_status'] != '2') {
+                                if ($bill['bill_status'] != '2' && $bill['bill_status'] != '3') {
                                     echo '<a href="'. $xoabill .'" onclick="return confirm(\'Bạn có chắc chắn muốn hủy đơn hàng?\')">
                                             <button class="btn btn-danger btn-sm">Hủy Đơn</button>
                                           </a>';
