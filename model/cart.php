@@ -66,27 +66,32 @@ function loadall_thongke(){
     }
     function bill_chi_tiet($listbill){
         global $img_path;
-        $tong=0;
-        $i=0;      
+        $tong = 0;
+        $i = 0;
+        
         foreach ($listbill as $cart) {
-        $hinh=$cart['img'];
-        $tong=$cart['thanhtien'];
-        echo '
-            <tr>
-                <td><img src="'.$hinh.'" alt="" height="80px"></td>
-                <td>'.$cart['name'].'</td>
-                <td>'.$cart['price'].' USD</td>
-                <td>'.$cart['soluong'].'</td>
-                <td>'.$cart['thanhtien'].' USD</td> 
-            </tr>';
-        $i+=1;
-                }
+            $hinh = $cart['img'];
+            $thanhtien = $cart['price'] * $cart['soluong'];  // Tính thành tiền cho từng sản phẩm
+            $tong += $thanhtien;  // Cộng dồn vào tổng đơn hàng
+            
+            echo '
+                <tr>
+                    <td><img src="' . $hinh . '" alt="" height="80px"></td>
+                    <td>' . $cart['name'] . '</td>
+                    <td>' . $cart['price'] . ' USD</td>
+                    <td>' . $cart['soluong'] . '</td>
+                    <td>' . $thanhtien . ' USD</td> 
+                </tr>';
+            $i++;
+        }
+        
+        // Hiển thị tổng tiền của tất cả sản phẩm trong đơn hàng
         echo '<tr>
                 <td colspan="4">Tổng hàng</td>
-                                
-                <td> '.$tong.' USD</td>
-                </tr>';
+                <td>' . $tong . ' USD</td>
+            </tr>';
     }
+    
     function tongdonhang(){
         $tong=0;
               
