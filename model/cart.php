@@ -124,10 +124,15 @@ function loadall_thongke(){
         return $bill;
     }
     function loadall_cart_count($idbill){
-        $sql="select * from cart where idbill=".$idbill;
-        $bill=pdo_query($sql);
-        return sizeof($bill);
+        // Sum the 'soluong' field to get the total number of items in the order
+        $sql = "SELECT SUM(soluong) AS total_quantity FROM cart WHERE idbill = ?";
+        $result = pdo_query_one($sql, [$idbill]);
+    
+        // Return the total quantity of products in the order
+        return $result['total_quantity'];
     }
+    
+    
     function loadall_bill($kyw="",$iduser=0){
         
         $sql="select * from bill where 1";

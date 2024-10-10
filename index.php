@@ -116,43 +116,47 @@ if(isset($_GET['act'])&&($_GET['act']!="")){
                         include "view/taikhoan/quenmk.php";
                         break;
 
-        case 'addtocart':
-            // if(!isset($_SESSION['mycart'])) $_SESSION['mycart'] = array();
-            if(isset($_POST['addtocart'])){
-                // session_destroy();die;
-                $id=$_POST['id'];
-                $name=$_POST['name'];
-                $img=$_POST['img'];
-                $price=$_POST['price'];
-                $soluong=1;
-                $ttien=$soluong * $price;
-
-                $spadd = [
-                    'id'=>$id,
-                    'name' => $name,
-                    'img' => $img,
-                    'price' => $price,
-                    'soluong' => $soluong,
-                    'ttien' => $price * $soluong
-                ];
-                $i=0;
-                $fg=0;
-                
-                //Kiểm tra xem đã có giỏ hàng chưa
-                if (!isset($_SESSION['mycart'])){
-                    $_SESSION['mycart'][$id] = $spadd;
-                } else {
-                    //Kiểm tra sản phẩm đã có trong giỏ hàng thì tăng soluong
-                    if (isset($_SESSION['mycart'][$id])) {
-                        $_SESSION['mycart'][$id]['soluong'] ;
-                    } else {
-                        $_SESSION['mycart'][$id] = $spadd;
-                    }
-                }
-                
-            }
-            include "view/cart/viewcart.php";
-            break;
+                        case 'addtocart':
+                            if (isset($_POST['addtocart'])) {
+                                $id = $_POST['id'];
+                                $name = $_POST['name'];
+                                $img = $_POST['img'];
+                                $price = $_POST['price'];
+                                $soluong = $_POST['soluong']; // Get quantity from form
+                                $ttien = $soluong * $price;
+                        
+                                // Create product array to add to cart
+                                $spadd = [
+                                    'id' => $id,
+                                    'name' => $name,
+                                    'img' => $img,
+                                    'price' => $price,
+                                    'soluong' => $soluong,
+                                    'ttien' => $ttien
+                                ];
+                        
+                                // Check if the cart exists in session
+                                if (!isset($_SESSION['mycart'])) {
+                                    // If cart doesn't exist, create it and add product
+                                    $_SESSION['mycart'][$id] = $spadd;
+                                } else {
+                                    // If product already exists in the cart, update the quantity
+                                    if (isset($_SESSION['mycart'][$id])) {
+                                        // Increment the quantity of the product
+                                        $_SESSION['mycart'][$id]['soluong'] += $soluong;
+                                        // Update the total price of the product
+                                        $_SESSION['mycart'][$id]['ttien'] = $_SESSION['mycart'][$id]['soluong'] * $price;
+                                    } else {
+                                        // If product is not in the cart, add it
+                                        $_SESSION['mycart'][$id] = $spadd;
+                                    }
+                                }
+                            }
+                        
+                            // Redirect to the cart view
+                            include "view/cart/viewcart.php";
+                            break;
+                        
         case 'delcart':
             if(isset($_GET['idcart'])){
                 unset($_SESSION['mycart'][$_GET['idcart']]);

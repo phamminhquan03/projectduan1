@@ -80,22 +80,18 @@ function pdo_query($sql){
  * @return array mảng chứa bản ghi
  * @throws PDOException lỗi thực thi câu lệnh
  */
-function pdo_query_one($sql){
-    $sql_args = array_slice(func_get_args(), 1);
-    try{
+function pdo_query_one($sql, $params = []) {
+    try {
         $conn = pdo_get_connection();
         $stmt = $conn->prepare($sql);
-        $stmt->execute($sql_args);
-        $row = $stmt->fetch(PDO::FETCH_ASSOC);
-        return $row;
-    }
-    catch(PDOException $e){
-        throw $e;
-    }
-    finally{
-        unset($conn);
+        $stmt->execute($params); // Ensure this line is passing the parameters correctly
+        $result = $stmt->fetch(PDO::FETCH_ASSOC); // Fetch one row as an associative array
+        return $result;
+    } catch (PDOException $e) {
+        throw new Exception("Query failed: " . $e->getMessage());
     }
 }
+
 /**
  * Thực thi câu lệnh sql truy vấn một giá trị
  * @param string $sql câu lệnh sql
