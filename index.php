@@ -231,6 +231,7 @@ if(isset($_GET['act'])&&($_GET['act']!="")){
                 $listbill = loadall_bill();  
                 include 'view/cart/mybill.php';  // Hiển thị lại danh sách đơn hàng
                 break;
+        
 
         case 'thoat':
             unset($_SESSION['user']);
