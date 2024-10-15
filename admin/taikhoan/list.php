@@ -139,7 +139,7 @@ table input[type="button"]:hover {
                                         <td>'.$address.'</td>
                                         <td>'.$tel.'</td>
                                         <td>'.$role.'</td>
-                                        <td><center><a href="'.$suatk.'"><input type="button" value="Sửa"></a>  <a href="'. $xoatk.'"><input type="button" value="Xóa"></center></td></a>
+                                        <td><center>  <a href="'. $xoatk.'"><input type="button" value="Xóa"></center></td></a>
                                     </tr>';
                             }
                         ?>

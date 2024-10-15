@@ -47,15 +47,15 @@ function loadall_thongke(){
         $quantityInputId = 'quantity_' . $cart['id'];
 
         echo '
-            <tr>
-                <td><img src="' . $hinh . '" alt="" height="80px"></td>
-                <td>' . $cart['name'] . '</td>
-                <td>' . $cart['price'] . ' USD</td>
-                <td><input min="1" type="number" id="' . $quantityInputId . '" value="' . $cart['soluong'] . '" onchange="updateTotal(' . $cart['price'] . ', ' . $quantityInputId . ')"></td>
-                <td id="total_' . $cart['id'] . '">' . $ttien . ' USD</td>
-                ' . $xoasp_td . '
-            </tr>';
-        $i += 1;
+        <tr>
+            <td><img src="' . $hinh . '" alt="" height="80px"></td>
+            <td>' . $cart['name'] . '</td>
+            <td>' . $cart['price'] . ' USD</td>
+            <td>' . $cart['soluong'] . '</td> <!-- Static quantity, not editable -->
+            <td id="total_' . $cart['id'] . '">' . $ttien . ' USD</td>
+            ' . $xoasp_td . '
+        </tr>';
+    
     }
 
     echo '<tr>
@@ -79,7 +79,10 @@ function loadall_thongke(){
                     <td><img src="' . $hinh . '" alt="" height="80px"></td>
                     <td>' . $cart['name'] . '</td>
                     <td>' . $cart['price'] . ' USD</td>
-                    <td>' . $cart['soluong'] . '</td>
+                     <td>
+                <input min="1" type="number" id="quantity_' . $cart['id'] . '" value="' . $cart['soluong'] . '" 
+                    onchange="updateQuantity(' . $cart['id'] . ', this.value, ' . $cart['price'] . ')">
+            </td>
                     <td>' . $thanhtien . ' USD</td> 
                 </tr>';
             $i++;
